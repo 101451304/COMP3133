@@ -1,0 +1,12 @@
+<div>
+  <h2>SpaceX Missions</h2>
+  <div *ngFor="let mission of launches" class="card">
+    <img [src]="mission.links.mission_patch_small" alt="Mission Patch">
+    <h3>{{ mission.mission_name }}</h3>
+    <p><strong>Flight Number:</strong> {{ mission.flight_number }}</p>
+    <p><strong>Launch Year:</strong> {{ mission.launch_year }}</p>
+    <p>{{ mission.details || 'No details available' }}</p>
+    <a [href]="mission.links.wikipedia" target="_blank">Wikipedia</a>
+    <a [href]="mission.links.video_link" target="_blank">Watch Video</a>
+  </div>
+</div>

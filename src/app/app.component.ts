@@ -1,12 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { SpacexService } from './services/spacex.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = '101451304-lab-test2-comp3133';
+  launches: any[] = [];
+  constructor(private spacexService: SpacexService) {}
+
+  ngOnInit(): void {
+    this.spacexService.getLaunches().subscribe(data => {
+      this.launches = data;
+    });
+  }
+
+  filterByYear(year: string) {
+    if (year) {
+      this.spacexService.getLaunchByYear(year).subscribe(data => {
+        this.launches = data;
+      });
+    } else {
+      this.spacexService.getLaunches().subscribe(data => {
+        this.launches = data;
+      });
+    }
+  }
 }
